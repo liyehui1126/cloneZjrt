@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cloneZjrt.dao.UserDAO">
+
+    <select id="queryAll" resultType="com.cloneZjrt.model.UserEntity">
+        SELECT * FROM userinfo
+    </select>
+
+    <select id="queryUserRoles" resultType="java.lang.String">
+        SELECT rolename FROM userroleinfo WHERE userid = #{userId}
+    </select>
+
+    <select id="getUserById" resultType="com.cloneZjrt.model.UserEntity">
+        SELECT * From userinfo WHERE userid = #{userId}
+    </select>
+
+    <select id="getUserByName" resultType="com.cloneZjrt.model.UserEntity">
+        SELECT * From userinfo WHERE username = #{userName}
+    </select>
+
+    <insert id="register" parameterType="com.cloneZjrt.model.UserEntity">
+        INSERT INTO userInfo(username)
+        VALUES (#{userName})
+    </insert>
+</mapper>
