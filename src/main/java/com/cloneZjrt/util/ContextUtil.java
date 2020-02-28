@@ -10,15 +10,15 @@ import org.springframework.stereotype.Component;
 /**
  * Context 工具类
  */
-@SuppressWarnings("static-access")
-@Component
+//@SuppressWarnings("static-access")
+//@Component
 public class ContextUtil implements ApplicationContextAware {
-//    private static ApplicationContext commonApplicationContext;
+//    private static ApplicationContext ac;
+//    private static ApplicationContext ac = new ClassPathXmlApplicationContext("spring/spring-redis.xml");
     private static ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 
     @Override
     public void setApplicationContext(ApplicationContext context) throws BeansException {
-//        this.commonApplicationContext = context;
         this.ac = context;
     }
 
@@ -29,7 +29,6 @@ public class ContextUtil implements ApplicationContextAware {
      *
      */
     public static Object getBean(String beanId) {
-//        return commonApplicationContext.getBean(beanId);
         return ac.getBean(beanId);
     }
 
@@ -41,7 +40,6 @@ public class ContextUtil implements ApplicationContextAware {
      *
      */
     public static <T> T getBean(String beanId, Class<T> clazz) {
-//        return commonApplicationContext.getBean(beanId, clazz);
         return ac.getBean(beanId, clazz);
     }
 }

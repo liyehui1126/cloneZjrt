@@ -2,9 +2,11 @@ package com.cloneZjrt.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
+import javax.annotation.Resource;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -27,7 +29,7 @@ public class RedisUtil {
      * 这样子注入会报错，无法注入！！！大坑！用@Resource也存在报错
      * 写一个工具类，使用最稳的方法获得ApplicationContext.xml中的bean
      */
-//    @Autowired
+//    @Resource
 //    public void setRedisTemplate(RedisTemplate redisTemplate) {
 //        RedisUtil.redisTemplate = redisTemplate;
 //    }

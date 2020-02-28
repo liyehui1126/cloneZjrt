@@ -22,7 +22,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @RunWith(SpringJUnit4ClassRunner.class)
 //告诉junit spring配置文件
 @WebAppConfiguration
-@ContextConfiguration({"classpath:applicationContext.xml"})
+@ContextConfiguration({"classpath*:applicationContext.xml"})
 public class TestDAO {
 
     @Autowired
@@ -41,8 +41,6 @@ public class TestDAO {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
-
-//    static RedisUtil redisUtil = new RedisUtil();
 
     static{
         RedisUtil.setCachePrefix("userid");
@@ -69,8 +67,10 @@ public class TestDAO {
     @Test
     public void testTwo(){
         try{
-            stringRedisTemplate.opsForValue().set("test", "测试");
-            System.out.println("value："+stringRedisTemplate.opsForValue().get("test"));
+//            RedisUtil.setString("test", "测试");
+            System.out.println(RedisUtil.getString("test"));
+//            redisTemplate.opsForValue().set("test", "测试");
+//            System.out.println("value："+redisTemplate.opsForValue().get("test"));
 //            redisTemplate.opsForValue().set("userid:1", "ha");
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -93,13 +93,6 @@ public class TestDAO {
 //            }
         }catch (Exception e){
             System.out.println(e.getMessage());
-        }
-    }
-
-    static{
-        RedisUtil.setCachePrefix("userid");
-        if(!RedisUtil.openCache()){
-            System.out.println("open error");
         }
     }
 
@@ -129,10 +122,10 @@ public class TestDAO {
     }
 
     @Autowired
-    private UserService userService;
+    private UserController userController;
 
     @Test
     public void testController(){
-        userService.getUserByName("111");
+        userController.getUser(1l);
     }
 }

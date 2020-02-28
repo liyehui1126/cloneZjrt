@@ -213,12 +213,49 @@
       <artifactId>gson</artifactId>
       <version>2.3.1</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.tomcat.embed</groupId>
+      <artifactId>tomcat-embed-websocket</artifactId>
+      <version>8.5.28</version>
+    </dependency>
 
     <dependency>
         <groupId>com.alibaba</groupId>
         <artifactId>fastjson</artifactId>
         <version>1.2.47</version>
     </dependency>
+
+    <!--文件上传相关开始-->
+    <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.4</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.3.1</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl -->
+    <!--<dependency>-->
+    <!--<groupId>javax.servlet.jsp.jstl</groupId>-->
+    <!--<artifactId>jstl</artifactId>-->
+    <!--<version>1.2</version>-->
+    <!--</dependency>-->
+
+    <!--excel导出-->
+    <dependency>
+      <groupId>net.sourceforge.jexcelapi</groupId>
+      <artifactId>jxl</artifactId>
+      <version>2.6.12</version>
+    </dependency>
+
+    <!--文件上传相关结束-->
+
 
   </dependencies>
 

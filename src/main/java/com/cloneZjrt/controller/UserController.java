@@ -74,9 +74,9 @@ public class UserController {
 //    }
 
 
-    @RequestMapping("getUser")
-    public @ResponseBody UserEntity getUser(Long userId) {
-
+    @RequestMapping(value = "getUser", method = RequestMethod.POST)
+    public UserEntity getUser(Long userId) {
+        System.out.println(userId);
         return userService.getUserById(userId);
 
     }
