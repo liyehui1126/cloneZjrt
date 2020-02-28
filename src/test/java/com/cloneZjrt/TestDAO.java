@@ -2,6 +2,8 @@ package com.cloneZjrt;
 
 import com.cloneZjrt.controller.UserController;
 import com.cloneZjrt.dao.UserDAO;
+import com.cloneZjrt.exception.BusinessException;
+import com.cloneZjrt.exception.LogicException;
 import com.cloneZjrt.model.UserEntity;
 import com.cloneZjrt.service.UserService;
 import com.cloneZjrt.util.RedisUtil;
@@ -62,6 +64,8 @@ public class TestDAO {
 //        }
 //        System.out.println(userDAO.queryAll().size());
 //        LOG.error("===");
+//        System.out.println();
+//        new BusinessException("文件已存在",415l).printStackTrace();
     }
 
     @Test

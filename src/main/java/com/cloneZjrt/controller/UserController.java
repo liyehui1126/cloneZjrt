@@ -1,12 +1,15 @@
 package com.cloneZjrt.controller;
 
 import com.cloneZjrt.dao.UserDAO;
+import com.cloneZjrt.exception.BusinessException;
 import com.cloneZjrt.model.UserEntity;
 import com.cloneZjrt.service.UserService;
 import com.cloneZjrt.util.RedisUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +19,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +27,8 @@ import java.util.List;
 @RequestMapping("/user")
 @ResponseBody
 public class UserController {
+
+    private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
     @Resource
     private UserService userService;
@@ -39,8 +45,15 @@ public class UserController {
 
     @GetMapping(value = "/test")
     public String test(){
-        System.out.println("test");
-        return "test";
+//        System.out.println("test");
+//        return "test";
+//        return new BusinessException("错误",400l).toString();
+        List<String> strings = new ArrayList<>();
+        try{
+            return strings.get(2);
+        }catch (Exception e){
+            throw e;
+        }
     }
 
 //    @PostMapping(value = "/login")
@@ -75,10 +88,15 @@ public class UserController {
 
 
     @RequestMapping(value = "getUser", method = RequestMethod.POST)
-    public UserEntity getUser(Long userId) {
+    public UserEntity getUser(@RequestParam(name = "userId") Long userId) {
         System.out.println(userId);
-        return userService.getUserById(userId);
-
+        UserEntity userEntity = new UserEntity();
+        try{
+            userEntity = userService.getUserById(userId);
+        }catch (Exception e){
+            throw new BusinessException("错误",400l);
+        }
+        return userEntity;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
