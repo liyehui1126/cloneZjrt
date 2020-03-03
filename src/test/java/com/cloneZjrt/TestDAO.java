@@ -6,17 +6,24 @@ import com.cloneZjrt.exception.BusinessException;
 import com.cloneZjrt.exception.LogicException;
 import com.cloneZjrt.model.UserEntity;
 import com.cloneZjrt.service.UserService;
+import com.cloneZjrt.util.JWTUtil;
 import com.cloneZjrt.util.RedisUtil;
+import com.cloneZjrt.util.XXSecurity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import java.lang.reflect.Method;
+import java.util.List;
 
 /**
  * Created by Administrator on 2020-1-23.
@@ -51,8 +58,33 @@ public class TestDAO {
         }
     }
 
+    @Autowired
+    private UserService userService;
+
     @Test
     public void testOne() throws Exception {
+//        try {
+//            //获取UserController对象
+//            Class userController = Class.forName("com.cloneZjrt.controller.UserController");
+//
+//            //这里形参为String.class,因为我这个方法返回的是String
+//            Method userMethod = userController.getMethod("test2", String.class);
+//
+//            if(userMethod.isAnnotationPresent(XXSecurity.class)){
+//                System.out.println("UserController类上配置了XXSecurity注解！");
+//                //获取该元素上指定类型的注解
+//                XXSecurity xxSecurity = userMethod.getAnnotation(XXSecurity.class);
+//                System.out.println("RoleConstant: " + xxSecurity.value());
+//                //在注解中，我设置的value属性是是一个数组，遍历一下全部打印
+//                for(Long l : xxSecurity.value()){
+//                    System.out.println(l);
+//                }
+//            }else{
+//                System.out.println("UserController类上没有配置XXSecurity注解！");
+//            }
+//        } catch (LogicException e) {
+//            e.printStackTrace();
+//        }
 
 //        LOG.info("info================");
 //        List<String> list = new ArrayList<>();
@@ -62,10 +94,17 @@ public class TestDAO {
 //            System.out.println(e.getMessage());
 //            LOG.error(e.getMessage(), e);
 //        }
-//        System.out.println(userDAO.queryAll().size());
+        System.out.println(userDAO.queryAll().size());
 //        LOG.error("===");
 //        System.out.println();
 //        new BusinessException("文件已存在",415l).printStackTrace();
+//        String s = JWTUtil.sign(1l,10000);
+//        System.out.println(s);
+//        Long ss = JWTUtil.unsign("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMjczMzQxMjUsInBheWxvYWQiOiJudWxsIn0.y_prZvk8NG1uk-vnML28lwyCtiDObdnm3h5fOfX3RUA",Long.class);
+//        System.out.println(ss);
+//        List<Long> roles = userService.getRoleIdByUserId(1l);
+//        System.out.println(roles.size());
+//        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
     }
 
     @Test

@@ -10,7 +10,7 @@ public interface UserDAO {
 
     List<UserEntity> queryAll();
 
-    List<String> queryUserRoles(Long userId);
+    List<Long> queryUserRoles(Long userId);
 
     UserEntity getUserById(Long userId);
 

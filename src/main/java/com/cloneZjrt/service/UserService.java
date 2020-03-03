@@ -16,4 +16,6 @@ public interface UserService {
     public UserEntity getUserById(Long userId);
 
     public int register(UserEntity userEntity);
+
+    public List<Long> getRoleIdByUserId(Long userId);
 }

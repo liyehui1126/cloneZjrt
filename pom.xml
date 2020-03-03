@@ -256,6 +256,27 @@
 
     <!--文件上传相关结束-->
 
+    <!-- jwt -->
+    <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
+    <dependency>
+      <groupId>com.auth0</groupId>
+      <artifactId>java-jwt</artifactId>
+      <version>2.2.0</version>
+    </dependency>
+
+    <!--Quartz依赖-->
+    <!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
+    <dependency>
+      <groupId>org.quartz-scheduler</groupId>
+      <artifactId>quartz</artifactId>
+      <version>2.3.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context-support</artifactId>
+      <version>4.2.6.RELEASE</version>
+    </dependency>
 
   </dependencies>
 
@@ -278,7 +299,7 @@
           <include>**/*.properties</include>
           <include>**/*.xml</include>
         </includes>
-        <filtering>false</filtering>
+        <filtering>true</filtering>
       </resource>
 
     </resources>

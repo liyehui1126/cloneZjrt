@@ -41,4 +41,9 @@ public class UserServiceImpl implements UserService {
     public int register(UserEntity userEntity) {
         return userDAO.register(userEntity);
     }
+
+    @Override
+    public List<Long> getRoleIdByUserId(Long userId) {
+        return userDAO.queryUserRoles(userId);
+    }
 }

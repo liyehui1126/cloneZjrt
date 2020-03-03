@@ -7,8 +7,8 @@
         SELECT * FROM userinfo
     </select>
 
-    <select id="queryUserRoles" resultType="java.lang.String">
-        SELECT rolename FROM userroleinfo WHERE userid = #{userId}
+    <select id="queryUserRoles" resultType="java.lang.Long">
+          SELECT role_id FROM user_role WHERE user_id = #{userId}
     </select>
 
     <select id="getUserById" resultType="com.cloneZjrt.model.UserEntity">

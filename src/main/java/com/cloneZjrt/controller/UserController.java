@@ -3,8 +3,10 @@ package com.cloneZjrt.controller;
 import com.cloneZjrt.dao.UserDAO;
 import com.cloneZjrt.exception.BusinessException;
 import com.cloneZjrt.model.UserEntity;
+import com.cloneZjrt.result.ReturnResult;
+import com.cloneZjrt.schedule.MyScheduler;
 import com.cloneZjrt.service.UserService;
-import com.cloneZjrt.util.RedisUtil;
+import com.cloneZjrt.util.*;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -44,16 +46,49 @@ public class UserController {
 //    }
 
     @GetMapping(value = "/test")
-    public String test(){
+    public String test(Long userId){
 //        System.out.println("test");
 //        return "test";
 //        return new BusinessException("错误",400l).toString();
-        List<String> strings = new ArrayList<>();
-        try{
-            return strings.get(2);
-        }catch (Exception e){
-            throw e;
-        }
+
+//        List<String> strings = new ArrayList<>();
+//        try{
+//            return strings.get(2);
+//        }catch (Exception e){
+//            throw e;
+//        }
+        return JWTUtil.sign(userId,86400000);
+    }
+
+    @RequestMapping(value = "test2", method = RequestMethod.GET)
+    @XXSecurity({RoleConstant.One,RoleConstant.Two})
+    public String test2(@RequestHeader("token")String token) {
+        Long userId = JWTUtil.unsign(token,Long.class);
+        UserEntity userEntity = userService.getUserById(userId);
+        return "OK";
+//        return ReturnResult.success(userEntity);
+    }
+
+    @RequestMapping(value = "test3", method = RequestMethod.GET)
+    @XXSecurity({RoleConstant.Four})
+    public String test3(@RequestHeader("token")String token) {
+        Long userId = JWTUtil.unsign(token,Long.class);
+        UserEntity userEntity = userService.getUserById(userId);
+        return "Ok";
+//        return ReturnResult.success(userEntity);
+    }
+
+    @RequestMapping(value = "test4", method = RequestMethod.GET)
+    public String test4() throws Exception{
+//        MyScheduler myScheduler = new MyScheduler();
+//        myScheduler.quartzText();
+        return "Ok";
+//        return ReturnResult.success(userEntity);
+    }
+
+    @RequestMapping(value = "test5", method = RequestMethod.GET)
+    public String test5() throws Exception{
+        return "Ok";
     }
 
 //    @PostMapping(value = "/login")
