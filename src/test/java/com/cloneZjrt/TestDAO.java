@@ -1,5 +1,7 @@
 package com.cloneZjrt;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.cloneZjrt.controller.UserController;
 import com.cloneZjrt.dao.UserDAO;
 import com.cloneZjrt.exception.BusinessException;
@@ -23,7 +25,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2020-1-23.
@@ -94,7 +99,41 @@ public class TestDAO {
 //            System.out.println(e.getMessage());
 //            LOG.error(e.getMessage(), e);
 //        }
-        System.out.println(userDAO.queryAll().size());
+//        for(UserEntity u : userDAO.queryAll()){
+//            System.out.println(u.getName());
+//        }
+
+//        UserEntity userEntity = userDAO.getUserById(1l);
+//        Map<String, Object> userMap = JSON.parseObject(JSON.toJSONString(userEntity), new TypeReference<Map<String, Object>>() {
+//
+//        });
+//
+//        System.out.println(userMap);
+
+//        UserEntity u1 = new UserEntity("user1");
+//        int i = userDAO.insertUser(u1);
+//        System.out.println(i + " == " + u1.getUserId());
+
+//        int i = userDAO.update(new UserEntity(3l,"333"));
+//        System.out.println(i);
+//        UserEntity u2 = new UserEntity("user2");
+//        List<UserEntity> userEntities = new ArrayList<UserEntity>(Arrays.asList(u1));
+//        int i = userDAO.insertUsers(userEntities);
+//        System.out.println(i);
+
+//        List<Long> userIds = new ArrayList<Long>();
+//        List<UserEntity> userEntities = userDAO.queryByIds(userIds,1l,5l);
+//        for(UserEntity u:userEntities){
+//            Map<String, Object> userMap = JSON.parseObject(JSON.toJSONString(u), new TypeReference<Map<String, Object>>() {});
+//            System.out.println(userMap);
+//        }
+
+//        List<UserEntity> userEntities = userDAO.getUserByNameTest("1");
+//        for(UserEntity u : userEntities){
+//            System.out.println(JSON.parseObject(JSON.toJSONString(u), new TypeReference<Map<String, Object>>(){}));
+//        }
+
+//        System.out.println(userDAO.queryAll().size());
 //        LOG.error("===");
 //        System.out.println();
 //        new BusinessException("文件已存在",415l).printStackTrace();

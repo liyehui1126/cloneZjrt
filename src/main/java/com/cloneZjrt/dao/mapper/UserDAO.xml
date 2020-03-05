@@ -3,7 +3,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cloneZjrt.dao.UserDAO">
 
-    <select id="queryAll" resultType="com.cloneZjrt.model.UserEntity">
+    <resultMap id="UserEntityMap" type="com.cloneZjrt.model.UserEntity">
+        <id property="userId" column="userid"></id>
+        <result property="userName" column="username"></result>
+        <!--<collection property="roleEntities" ofType="com.cloneZjrt.model.RoleEntity">-->
+            <!--<id property="roleId" column="roleid" />-->
+            <!--<result property="roleName" column="rolename" />-->
+            <!--<result property="description" column="description" />-->
+        <!--</collection>-->
+        <association property="detailsEntity" javaType="com.cloneZjrt.model.DetailsEntity">
+            <id  property="userId" column="user_id"/>
+            <result  property="phone" column="phone"/>
+            <result  property="description" column="description"/>
+        </association>
+    </resultMap>
+
+    <!--<select id="queryAll" resultType="com.cloneZjrt.model.UserEntity">-->
+    <select id="queryAll" resultMap="UserEntityMap">
         SELECT * FROM userinfo
     </select>
 
@@ -11,13 +27,108 @@
           SELECT role_id FROM user_role WHERE user_id = #{userId}
     </select>
 
-    <select id="getUserById" resultType="com.cloneZjrt.model.UserEntity">
-        SELECT * From userinfo WHERE userid = #{userId}
+
+    <insert id="insertUsers" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO userinfo (username)
+        values
+        <foreach collection="list" item="user" index="index" open="(" separator="," close=")">
+            #{user.userName}
+        </foreach>
+    </insert>
+
+    <!--用的不多，这里简单实现一个自增Id的返回-->
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO userinfo (username)
+        values (#{userName})
+        <selectKey resultType="java.lang.Long" keyProperty="userId" keyColumn="userid" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <parameterMap id="UserParameterMap" type="com.cloneZjrt.model.UserEntity">
+        <parameter property="userName" resultMap="UserEntityMap" />
+    </parameterMap>
+
+    <update id="update" parameterMap="UserParameterMap">
+        UPDATE userinfo SET
+        username = #{userName}
+        WHERE userid = #{userId}
+    </update>
+
+    <!-- in查询所有，包含分页 -->
+    <select id="queryByIds" resultType="com.cloneZjrt.model.UserEntity">
+        select * from userinfo where 1 = 1
+        <if test="userIds != null and userIds.size > 0">
+            and userid in
+            <foreach item="userId" collection="userIds" index="index" open="(" separator="," close=")">
+                #{userId}
+            </foreach>
+        </if>
+        ORDER BY userid DESC
+        limit #{startRow},#{pageSize}
+    </select>
+
+    <!--<select id="getUserById" resultType="com.cloneZjrt.model.UserEntity">-->
+        <!--SELECT * From userinfo WHERE userid = #{userId}-->
+    <!--</select>-->
+
+    <!--<select id="getUserById" resultMap="UserEntityMap">-->
+        <!--select *-->
+        <!--from userinfo u left join user_role ur-->
+                <!--on u.userid = ur.user_id-->
+            <!--left join roleinfo r-->
+                <!--on ur.role_id = r.roleid-->
+        <!--where u.userid = #{userId}-->
+    <!--</select>-->
+
+    <select id="getUserById" resultMap="UserEntityMap">
+        select *
+        from userinfo u left join detailsinfo d
+                on u.userid = d.user_id
+        where u.userid = #{userId}
     </select>
 
     <select id="getUserByName" resultType="com.cloneZjrt.model.UserEntity">
         SELECT * From userinfo WHERE username = #{userName}
     </select>
+
+    <!--choose加模糊查询-->
+    <select id="getUserByNameTest" resultType="com.cloneZjrt.model.UserEntity">
+        SELECT
+        <include refid="User_Column_List" />
+        From userinfo WHERE 1 = 1
+        <include refid="Query_User" />
+    </select>
+
+    <sql id="User_Column_List">
+        username
+    </sql>
+
+    <sql id="Query_User">
+        <choose>
+            <when test="userName!=null and userName!=''">
+                <!--AND username LIKE CONCAT('%',#{userName},'%')-->
+                <bind name="userNameLike" value=" '%' + userName + '%' "/>
+                AND username LIKE #{userNameLike}
+            </when>
+            <otherwise>
+                AND username = '111'
+            </otherwise>
+        </choose>
+    </sql>
+    
+    <!--简单的Sql拼接进行动态查询-->
+    <!--<select id="getUserByNameTest" resultType="com.cloneZjrt.model.UserEntity">-->
+        <!--SELECT-->
+        <!--<include refid="User_Colomn_List" />-->
+        <!--From userinfo-->
+        <!--<trim prefix="WHERE" prefixOverrides="AND">-->
+          <!--<if test="userName!=null and userName!=''">-->
+              <!--AND username = #{userName}-->
+          <!--</if>-->
+        <!--</trim>-->
+    <!--</select>-->
+
 
     <insert id="register" parameterType="com.cloneZjrt.model.UserEntity">
         INSERT INTO userInfo(username)
