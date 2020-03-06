@@ -95,9 +95,7 @@ public class TestDAO {
 //        }
 
         UserEntity userEntity = userDAO.getUserById(1l);
-        Map<String, Object> userMap = JSON.parseObject(JSON.toJSONString(userEntity), new TypeReference<Map<String, Object>>() {
-
-        });
+        System.out.println(JSON.parseObject(JSON.toJSONString(userEntity), new TypeReference<Map<String, Object>>() {}));
 //
 //        System.out.println(userMap);
 
