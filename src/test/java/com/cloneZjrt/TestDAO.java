@@ -3,31 +3,22 @@ package com.cloneZjrt;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.cloneZjrt.controller.UserController;
-import com.cloneZjrt.dao.UserDAO;
-import com.cloneZjrt.exception.BusinessException;
-import com.cloneZjrt.exception.LogicException;
+import com.cloneZjrt.dao.UserDao;
 import com.cloneZjrt.model.UserEntity;
+import com.cloneZjrt.repository.UserRepository;
 import com.cloneZjrt.service.UserService;
-import com.cloneZjrt.util.JWTUtil;
 import com.cloneZjrt.util.RedisUtil;
-import com.cloneZjrt.util.XXSecurity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,7 +31,7 @@ import java.util.Map;
 public class TestDAO {
 
     @Autowired
-    private UserDAO userDAO;
+    private UserDao userDAO;
 
     private static RedisTemplate redisTemplate;
 
@@ -103,10 +94,10 @@ public class TestDAO {
 //            System.out.println(u.getName());
 //        }
 
-//        UserEntity userEntity = userDAO.getUserById(1l);
-//        Map<String, Object> userMap = JSON.parseObject(JSON.toJSONString(userEntity), new TypeReference<Map<String, Object>>() {
-//
-//        });
+        UserEntity userEntity = userDAO.getUserById(1l);
+        Map<String, Object> userMap = JSON.parseObject(JSON.toJSONString(userEntity), new TypeReference<Map<String, Object>>() {
+
+        });
 //
 //        System.out.println(userMap);
 
@@ -137,13 +128,27 @@ public class TestDAO {
 //        LOG.error("===");
 //        System.out.println();
 //        new BusinessException("文件已存在",415l).printStackTrace();
-//        String s = JWTUtil.sign(1l,10000);
+//        String s = JwtUtil.sign(1l,10000);
 //        System.out.println(s);
-//        Long ss = JWTUtil.unsign("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMjczMzQxMjUsInBheWxvYWQiOiJudWxsIn0.y_prZvk8NG1uk-vnML28lwyCtiDObdnm3h5fOfX3RUA",Long.class);
+//        Long ss = JwtUtil.unsign("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMjczMzQxMjUsInBheWxvYWQiOiJudWxsIn0.y_prZvk8NG1uk-vnML28lwyCtiDObdnm3h5fOfX3RUA",Long.class);
 //        System.out.println(ss);
 //        List<Long> roles = userService.getRoleIdByUserId(1l);
 //        System.out.println(roles.size());
 //        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+    }
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Test
+    public void testMp(){
+
+        //根据ID查
+        UserEntity userEntity = userRepository.selectById(1l);
+
+
+
+        System.out.println(JSON.parseObject(JSON.toJSONString(userEntity), new TypeReference<Map<String, Object>>(){}));
     }
 
     @Test

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.cloneZjrt.dao.UserDAO">
+<mapper namespace="com.cloneZjrt.dao.UserDao">
 
     <resultMap id="UserEntityMap" type="com.cloneZjrt.model.UserEntity">
         <id property="userId" column="userid"></id>
         <result property="userName" column="username"></result>
-        <!--<collection property="roleEntities" ofType="com.cloneZjrt.model.RoleEntity">-->
-            <!--<id property="roleId" column="roleid" />-->
-            <!--<result property="roleName" column="rolename" />-->
-            <!--<result property="description" column="description" />-->
-        <!--</collection>-->
-        <association property="detailsEntity" javaType="com.cloneZjrt.model.DetailsEntity">
-            <id  property="userId" column="user_id"/>
-            <result  property="phone" column="phone"/>
-            <result  property="description" column="description"/>
-        </association>
+        <collection property="roleEntities" ofType="com.cloneZjrt.model.RoleEntity">
+            <id property="roleId" column="roleid" />
+            <result property="roleName" column="rolename" />
+            <result property="description" column="description" />
+        </collection>
+        <!--<association property="detailsEntity" javaType="com.cloneZjrt.model.DetailsEntity">-->
+            <!--<id  property="userId" column="user_id"/>-->
+            <!--<result  property="phone" column="phone"/>-->
+            <!--<result  property="description" column="description"/>-->
+        <!--</association>-->
     </resultMap>
 
     <!--<select id="queryAll" resultType="com.cloneZjrt.model.UserEntity">-->
@@ -40,9 +40,9 @@
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="userId">
         INSERT INTO userinfo (username)
         values (#{userName})
-        <selectKey resultType="java.lang.Long" keyProperty="userId" keyColumn="userid" order="AFTER" >
-            SELECT LAST_INSERT_ID()
-        </selectKey>
+        <!--<selectKey resultType="java.lang.Long" keyProperty="userId" keyColumn="userid" order="AFTER" >-->
+            <!--SELECT LAST_INSERT_ID()-->
+        <!--</selectKey>-->
     </insert>
 
     <parameterMap id="UserParameterMap" type="com.cloneZjrt.model.UserEntity">

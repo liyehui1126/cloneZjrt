@@ -65,7 +65,7 @@ public class MyInterceptor implements HandlerInterceptor {
 //            Claims c = util.parseJWT(jwt);
             //拿到自定义的角色数组
 //            List<Integer> list = (List<Integer>) c.get("roles");
-            Long userId = JWTUtil.unsign(token,Long.class);
+            Long userId = JwtUtil.unsign(token,Long.class);
             if (userId == null || userService.getUserById(userId) == null) {
 //                throw new InsufficientAuthorityException("非法用户");
                 System.out.println("非法用户");

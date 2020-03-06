@@ -1,29 +1,18 @@
 package com.cloneZjrt.controller;
 
-import com.cloneZjrt.dao.UserDAO;
+import com.cloneZjrt.dao.UserDao;
 import com.cloneZjrt.exception.BusinessException;
 import com.cloneZjrt.model.UserEntity;
-import com.cloneZjrt.result.ReturnResult;
-import com.cloneZjrt.schedule.MyScheduler;
 import com.cloneZjrt.service.UserService;
 import com.cloneZjrt.util.*;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -36,7 +25,7 @@ public class UserController {
     private UserService userService;
 
     @Resource
-    private UserDAO userDAO;
+    private UserDao userDAO;
 
 //    @RequestMapping(value = "/countId", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
 //    @ResponseBody
@@ -57,13 +46,13 @@ public class UserController {
 //        }catch (Exception e){
 //            throw e;
 //        }
-        return JWTUtil.sign(userId,86400000);
+        return JwtUtil.sign(userId,86400000);
     }
 
     @RequestMapping(value = "test2", method = RequestMethod.GET)
     @XXSecurity({RoleConstant.One,RoleConstant.Two})
     public String test2(@RequestHeader("token")String token) {
-        Long userId = JWTUtil.unsign(token,Long.class);
+        Long userId = JwtUtil.unsign(token,Long.class);
         UserEntity userEntity = userService.getUserById(userId);
         return "OK";
 //        return ReturnResult.success(userEntity);
@@ -72,7 +61,7 @@ public class UserController {
     @RequestMapping(value = "test3", method = RequestMethod.GET)
     @XXSecurity({RoleConstant.Four})
     public String test3(@RequestHeader("token")String token) {
-        Long userId = JWTUtil.unsign(token,Long.class);
+        Long userId = JwtUtil.unsign(token,Long.class);
         UserEntity userEntity = userService.getUserById(userId);
         return "Ok";
 //        return ReturnResult.success(userEntity);

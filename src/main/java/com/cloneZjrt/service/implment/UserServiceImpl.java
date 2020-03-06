@@ -1,11 +1,9 @@
 package com.cloneZjrt.service.implment;
 
 
-import com.cloneZjrt.dao.UserDAO;
+import com.cloneZjrt.dao.UserDao;
 import com.cloneZjrt.model.UserEntity;
 import com.cloneZjrt.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +13,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     
     @Resource
-    private UserDAO userDAO;
+    private UserDao userDAO;
     
     @Override
     public Integer userSize() {

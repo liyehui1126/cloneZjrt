@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.cloneZjrt.dao.MessageDAO">
+<mapper namespace="com.cloneZjrt.dao.MessageDao">
 
     <insert id="addMessage" parameterType="com.cloneZjrt.model.MessageEntity">
         INSERT INTO messageinfo(send_user_id, chat_date, "value", receive_user_id, msgType)

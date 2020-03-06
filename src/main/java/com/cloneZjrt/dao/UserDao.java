@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface UserDAO {
+public interface UserDao {
 
     List<UserEntity> queryAll();
 

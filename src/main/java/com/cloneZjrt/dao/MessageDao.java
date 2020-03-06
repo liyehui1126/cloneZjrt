@@ -2,7 +2,7 @@ package com.cloneZjrt.dao;
 
 import com.cloneZjrt.model.MessageEntity;
 
-public interface MessageDAO {
+public interface MessageDao {
 
     int addMessage(MessageEntity messageEntity);
 }
