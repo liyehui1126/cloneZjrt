@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--<bean id="jobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">-->
+        <!--<property name="jobClass" value="com.cloneZjrt.schedule.MyJob"></property>-->
+        <!--<property name="durability" value="true"></property>-->
+        <!--<property name="jobDataAsMap">-->
+            <!--<map>-->
+                <!--<entry key="timeout" value="10" />-->
+                <!--<entry key="stringValue" value="value====" />-->
+            <!--</map>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash;触发器配置&ndash;&gt;-->
+    <!--<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">-->
+        <!--&lt;!&ndash;映入jobDetail&ndash;&gt;-->
+        <!--<property name="jobDetail" ref="jobDetail" />-->
+        <!--&lt;!&ndash;延迟开始&ndash;&gt;-->
+        <!--<property name="startDelay" value="0" />-->
+        <!--&lt;!&ndash;相隔时间&ndash;&gt;-->
+        <!--<property name="repeatInterval" value="2000" />-->
+        <!--&lt;!&ndash;重复次数&ndash;&gt;-->
+        <!--<property name="repeatCount" value="10" />-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 &ndash;&gt;-->
+    <!--<bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">-->
+        <!--&lt;!&ndash; 管理trigger &ndash;&gt;-->
+        <!--<property name="triggers">-->
+            <!--<list>-->
+                <!--&lt;!&ndash;任务列表&ndash;&gt;-->
+                <!--<ref bean="simpleTrigger" />-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+</beans>

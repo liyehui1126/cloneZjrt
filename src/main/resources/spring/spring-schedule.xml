@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                    http://www.springframework.org/schema/context
+                    http://www.springframework.org/schema/context/spring-context-4.0.xsd
+                    http://www.springframework.org/schema/task
+                    http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <!--第一种方式-->
+    <context:component-scan base-package="com.cloneZjrt.schedule" />
+
+    <!--第二种方式-->
+    <!--<task:scheduler id="mySchedulerOne" pool-size="5"/>-->
+
+    <!--<bean id="test" class="com.cloneZjrt.schedule.MyScheduler"></bean>-->
+
+    <!--<task:scheduled-tasks scheduler="mySchedulerOne">-->
+        <!--<task:scheduled ref="test" method="doSomething" cron="${schedule.task.doSomething}"/>-->
+    <!--</task:scheduled-tasks>-->
+
+    <!--可配置多个scheduler-->
+    <!--<task:scheduler id="mySchedulerTwo"/>-->
+    <!--<task:scheduled-tasks scheduler="myScheduler2">-->
+        <!--<task:scheduled ref="myScheduler" method="doOtherThing" cron="0/5 * *  * * ?"/>-->
+    <!--</task:scheduled-tasks>-->
+
+</beans>
