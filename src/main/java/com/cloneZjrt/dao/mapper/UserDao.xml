@@ -65,7 +65,7 @@
             </foreach>
         </if>
         ORDER BY userid DESC
-        limit #{startRow},#{pageSize}
+        limit ${(startRow - 1) * pageSize},#{pageSize}
     </select>
 
     <!--<select id="getUserById" resultType="com.cloneZjrt.model.UserEntity">-->

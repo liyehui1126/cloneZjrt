@@ -141,12 +141,65 @@ public class TestDAO {
     @Test
     public void testMp(){
 
-        //根据ID查
-        UserEntity userEntity = userRepository.selectById(1l);
+//        根据ID查
+//        UserEntity userEntity = userRepository.selectById(1l);
+//        List<UserEntity> userEntities = userRepository.selectList(
+//                new EntityWrapper<UserEntity>().like("username","1").and().between("userid",1l,12l)
+//        );
+//        for(UserEntity u : userEntities){
+//            System.out.println(entityToMap(u));
+//        }
+//
+//        List<UserEntity> userEntityList = userRepository.selectPage(
+//                new Page<UserEntity>(2,3),new EntityWrapper<UserEntity>()
+//        );
+//        for(UserEntity u : userEntityList){
+//            System.out.println(entityToMap(u));
+//        }
 
 
+//        // 初始化 成功标识
+//        boolean result = false;
+//        // 初始化 User
+//        UserEntity user = new UserEntity();
+//
+//        // 保存 User
+//        user.setUserName("Tom");
+//        result = user.insert();
+//
+//        // 更新 User
+//        user.setUserName("Tony");
+//        result = user.updateById();
+//
+//        // 查询 User
+//        UserEntity exampleUser = user.selectById();
+//
+//        // 查询姓名为‘张三’的所有用户记录
+//        List<UserEntity> userList1 = user.selectList(
+//                new EntityWrapper<UserEntity>().eq("username", "张三")
+//        );
+//
+//        // 删除 User
+//        result = user.deleteById();
+//
+//        // 分页查询 10 条姓名为‘张三’的用户记录
+//        List<UserEntity> userList = user.selectPage(
+//                new Page<UserEntity>(1, 10),
+//                new EntityWrapper<UserEntity>().eq("username", "张三")
+//        ).getRecords();
+//
+//        // 分页查询 10 条姓名为‘张三’、性别为男，且年龄在18至50之间的用户记录
+//        List<UserEntity> userEntityList = user.selectPage(
+//                new Page<UserEntity>(1, 10),
+//                new EntityWrapper<UserEntity>().eq("name", "张三")
+//                        .eq("sex", 0)
+//                        .between("age", "18", "50")
+//        ).getRecords();
 
-        System.out.println(JSON.parseObject(JSON.toJSONString(userEntity), new TypeReference<Map<String, Object>>(){}));
+    }
+
+    Map<String, Object> entityToMap(Object o){
+        return JSON.parseObject(JSON.toJSONString(o), new TypeReference<Map<String, Object>>(){});
     }
 
     @Test
